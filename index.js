@@ -1,9 +1,9 @@
 var AWS = require('aws-sdk');
 
-function deleteMessage(sqs, queue, messageHandler, logger) {
+function deleteMessage(sqs, queue, messageHandle, logger) {
     sqs.deleteMessage({
         QueueUrl: queue,
-        ReceiptHandle: messageHandler
+        ReceiptHandle: messageHandle
     }, function(error) {
         if (error) {
             logger.error(error);
