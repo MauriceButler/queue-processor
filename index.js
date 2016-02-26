@@ -1,9 +1,9 @@
 var AWS = require('aws-sdk');
 
-function deleteMessage(sqs, queue, messageHandle, logger) {
+function deleteMessage(sqs, queue, messageHandler, logger) {
     sqs.deleteMessage({
         QueueUrl: queue,
-        ReceiptHandle: messageHandle
+        ReceiptHandle: messageHandler
     }, function(error) {
         if (error) {
             logger.error(error);
@@ -30,6 +30,7 @@ function getMessage(sqs, config, logger, processingFunction, recurse) {
         {
             QueueUrl: config.queueUrl,
             MaxNumberOfMessages: 1,
+            VisibilityTimeout: config.visibilityTime || 10,
             WaitTimeSeconds: config.waitTime || 10
         },
         function(error, data) {
