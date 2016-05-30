@@ -30,7 +30,7 @@ function getMessage(sqs, config, logger, processingFunction, recurse) {
         {
             QueueUrl: config.queueUrl,
             MaxNumberOfMessages: 1,
-            VisibilityTimeout: config.visibilityTime || 10,
+            VisibilityTimeout: config.visibilityTime || 30,
             WaitTimeSeconds: config.waitTime || 10
         },
         function(error, data) {
